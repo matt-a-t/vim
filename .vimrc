@@ -12,9 +12,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'liuchengxu/vim-better-default'
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'do': 'npm install --omit=dev',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
-Plug 'ternjs/tern_for_vim', { 'do' : 'npm install' }
 
 call plug#end()
 
@@ -30,7 +29,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ 'C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 "2 space tabs
 filetype plugin indent on
@@ -46,8 +45,7 @@ command -nargs=1 Sch noautocmd vimgrep /<args>/gj `git ls-files` | cw
 nnoremap <leader>p :Prettier<CR>
 
 "visual block ctrl-v workaround
-command VisualBlock normal <C-v>
-nnoremap <leader>v :VisualBlock<CR>
+nnoremap <leader>v <C-v>
 
 "kill netrw file explorer buffer
 autocmd FileType netrw nmap <silent> <buffer> <Esc> :bd<cr>
